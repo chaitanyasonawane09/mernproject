@@ -22,7 +22,7 @@ next();
 app.get('/',(req,res)=>{
   res.send("helloworlf");
 });
-app.get('/about',middleware,(req,res)=>{              //middleware check that before going to this about page user valid or not if valid then go ot next
+app.get('/about',middleware,(req,res)=>{              //middleware Check that before going to this about page user valid or not if valid then go ot next
     res.send("about");
   });
   app.get('/contact',(req,res)=>{
