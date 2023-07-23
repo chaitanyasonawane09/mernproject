@@ -4,37 +4,33 @@ const mongoose=require('mongoose');
 const dotenv=require("dotenv");
 
 dotenv.config({path:'./config.env'});
-const DB=process.env.DATABASE;
+require('./db/conn');
+//const User=require('./model/userSchema');
 
-mongoose.connect(DB
-).then(()=>{
-  console.log(`connection succesful`);
-}).catch((err)=>console.log('no connection'));
+//we link router files to make our route easy
+app.use(express.json());               //convert data into object
+app.use(require('./router/auth'));
+const PORT= process.env.PORT;
 
 
-//middleware
-const middleware=(req,res,next)=>{
-console.log("middleware");
-next();
-}
 
 
 app.get('/',(req,res)=>{
-  res.send("helloworlf");
+  res.send("helloworlf from server");
 });
-app.get('/about',middleware,(req,res)=>{              //middleware Check that before going to this about page user valid or not if valid then go ot next
-    res.send("about");
-  });
+// app.get('/about',middleware,(req,res)=>{              //middleware Check that before going to this about page user valid or not if valid then go ot next
+//     res.send("about");
+//   });
   app.get('/contact',(req,res)=>{
     res.send("contact");
   });
-  app.get('/signin',(req,res)=>{
-    res.send("signin");
-  });
-  app.get('/signup',(req,res)=>{
-    res.send("signup");
-  });
+  // app.get('/signin',(req,res)=>{
+  //   res.send("signin");
+  // });
+  // app.get('/signup',(req,res)=>{
+  //   res.send("signup");
+  // });
 
-app.listen(3000,()=>{
-    console.log(`server is running at port 3000`);
+app.listen(PORT,()=>{
+    console.log(`server is running at port ${PORT}`);
 })
